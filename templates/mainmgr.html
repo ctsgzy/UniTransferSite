@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>UniTransfer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/statics/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/statics/css/bootstrap-table.min.css" rel="stylesheet"> 
+    <!-- Bootstrap theme -->
+    <link href="/statics/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <link href="/statics/css/bootstrap-combobox.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/statics/js/ie-emulation-modes-warning.js"></script>
+    <script src="/statics/js/jquery.js"></script>
+    <script src="/statics/js/bootstrap-combobox.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        function ajaxobj(_url, _tag, _way, _form)
+      {
+        var m = (typeof(_way)  ==  "undefined" ? "GET" :_way );
+        var par = (typeof(_form)  ==  "undefined" ? "" :$(_form).serialize());
+        var info = "";
+        $.ajax({
+          type:m,
+          url:_url,
+          data:par,
+          async: false,
+          error: function(request) {
+            //alert("Connection error");
+          },
+          success: function(data) {
+            //$(_tag).html(data);
+            //alert(data);
+            info = data;
+          }
+        });
+        return info;
+      }
+      </script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">UniTransferMgr</a>
+        </div>
+        <div class="row">
+          <div class="col-lg-7 col-md-7">
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/mypacks/">订单管理</a></li>
+                <li><a href="#fee">运单管理</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+          <div class="col-lg-3 col-md-3">
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="#">欢迎您，{{user.username}}</a></li>
+                <li>
+                  {% csrf_token %}
+                  <a href="/logout/" >注销</a>             
+                </li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+
+      </div>
+    </nav>
+
+    <div class="container theme-showcase" role="main">
+      <div id="HomeContent">
+        {% block content %}{% endblock %}
+      </div>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/statics/js/jquery.min.js"></script>
+    <script src="/statics/js/bootstrap.min.js"></script>
+    <script src="/statics/js/bootstrap-table.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+{% extends "templates/main.html" %}
+
+{% block title %}User Regist{% endblock %}
+
+{% block content %}
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#regist').click(function(event){
+      var email=$('#username').val();
+      if(valid_email(email)) {
+        $('#username').
+        alert('valid');
+      } else {
+        alert('invalid');
+        event.preventDefault();
+      }
+    });
+  });
+
+  function valid_email(email) {
+    var patten = new RegExp(/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]+$/);
+    return patten.test(email);
+  }
+
+</script>
+
+<div class="jumbotron">
+  <div class="row">  
+    <div class="col-lg-9 col-md-9">
+      <h1>转运网站</h1>
+      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    </div>
+    
+    <div class="col-lg-3 col-md-3">
+      <form class="form-horizontal" action="/regist/" method="post" role="form">
+        {% csrf_token %}
+        <h1>
+        </h1>
+        <br>
+        <br>
+        <div class="form-group">
+          <input type="text" name="username" id="username" required="required" class="form-control" placeholder="请输入登录邮箱" autofocus>
+        </div>
+
+        <div class="form-group">
+          <input type="password" name="password1" required="required" class="form-control" placeholder="请输入密码">
+        </div>
+
+        <div class="form-group">
+          <input type="password" name="password2" required="required" class="form-control" placeholder="再次输入密码">
+        </div>
+
+        <div class="form-group">
+        <button class="btn btn-primary topsecloginbtn"  id = "regist" type="submit" fromaction="/regist/">注册</button>
+        </div>
+      </form>
+    </div>
+   </div>   
+</div>
+
+
+
+{% endblock %}

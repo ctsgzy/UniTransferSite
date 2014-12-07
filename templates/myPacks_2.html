@@ -1,0 +1,79 @@
+{% extends "templates/main.html" %}
+
+{% block title %}我的包裹{% endblock %}
+
+{% block content %}
+
+{% include "templates/clientmenu.html" %}
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $table = $('#table-pagination').bootstrapTable({ 
+      data: $("#ptdata").data('ptdata')
+    });
+  });
+</script>
+
+
+<div class="page-header">
+  <h3>我的包裹</h3>
+</div>
+
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#">全部
+        <span class="badge">
+          {% if nTotal %}
+            {{  nTotal  }}
+          {% else %}
+            0
+          {% endif %}
+        </span>
+      </a>
+    </li>
+    <li role="presentation">
+      <a href="#">待入库
+        <span class="badge">
+          {% if nTotal %}
+            {{  nTotal  }}
+          {% else %}
+            0
+          {% endif %}
+        </span>
+      </a>
+    </li>
+    <li role="presentation">
+        <a href="#">已入库
+        <span class="badge">0</span>
+      </a>
+    </li>
+  </ul>
+
+<div id="ptdata" data-ptdata="{{ptdata}}"></div>
+
+<div id="custom-toolbar">
+    <div class="form-inline" role="form">
+        <button class="btn btn-default">提交</button>
+        <button class="btn btn-default">修改</button>
+        <button class="btn btn-default">删除</button>
+    </div>
+</div>
+
+<table id="table-pagination" data-toggle="table" data-height="400" data-toolbar="#custom-toolbar" data-pagination="true" data-search="true">
+    <thead>
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="id" data-sortable="true">包裹ID</th>
+            <th data-field="status" data-sortable="true">状态</th>
+            <th data-field="rep_no" data-sorter="priceSorter">仓位号</th>
+            <th data-field="content" data-sorter="priceSorter">内容说明</th>
+            <th data-field="deliver" data-sorter="priceSorter">快递公司</th>
+            <th data-field="deliver_no" data-sorter="priceSorter">快递单号</th>
+            <th data-field="shopping_site" data-sorter="priceSorter">购物网站</th>
+            <th data-field="createtime" data-sorter="priceSorter">提交时间</th>
+        </tr>
+    </thead>
+</table>
+
+{% endblock %}

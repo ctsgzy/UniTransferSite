@@ -1,0 +1,133 @@
+{% extends "templates/main.html" %}
+
+{% block title %}我的包裹{% endblock %}
+
+{% block content %}
+
+{% include "templates/clientmenu.html" %}
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#table-pagination').bootstrapTable({data:''});
+    getpacksaj(0);
+  });
+
+  function getpacksaj(status)
+  {
+      //remove old data
+      //$('#table-pagination').bootstrapTable('')
+      //var selects = $table.bootstrapTable('getSelections');
+      changenavstate(status);
+      removeptdata();
+      var url = "/getpacksaj?status=" + status; 
+      //alert(url);
+      var ptdata = ajaxobj(url, "", "get", "");
+      var jsonobj = eval('(' + ptdata + ')');
+      //alert(ptdata);
+      //var v = document.getElementById('ptdata');
+      //v.setAttribute('data-ptdata',ptdata);
+      $('#table-pagination').bootstrapTable('load', jsonobj);
+
+
+      //var selects = $table.bootstrapTable('getSelections');
+      //$('#table-pagination').bootstrapTable({data:$("#ptdata").data('ptdata')});
+  }
+
+  function removeptdata()
+  {
+    $('#table-pagination').bootstrapTable('checkAll');
+    var selects = $('#table-pagination').bootstrapTable('getSelections');
+    ids = $.map(selects, function (row) {
+                        return row.id;
+                    });
+
+    $('#table-pagination').bootstrapTable('remove', {
+        field: 'id',
+        values: ids
+    });
+  }
+
+  function changenavstate(status)
+  {
+        $('#nav_all').removeClass("active");
+        $('#nav_status1').removeClass("active");
+        $('#nav_status2').removeClass("active");
+        if(status == '0')
+          $('#nav_all').addClass("active");
+        else if(status =='1')
+          $('#nav_status1').addClass("active");     
+        else if(status =='2')
+          $('#nav_status2').addClass("active");    
+  }
+
+</script>
+
+
+<div class="page-header">
+  <h3>我的包裹</h3>
+</div>
+
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" id="nav_all" class="active">
+      <a href="javascript:void(0)" onclick="getpacksaj(0)">全部
+        <span class="badge">
+          {% if nTotal %}
+            {{  nTotal  }}
+          {% else %}
+            0
+          {% endif %}
+        </span>
+      </a>
+    </li>
+    <li role="presentation" id="nav_status1">
+      <a href="javascript:void(0)" onclick="getpacksaj(1)">待入库
+        <span class="badge">
+          {% if nStatus_1 %}
+            {{  nStatus_1  }}
+          {% else %}
+            0
+          {% endif %}
+        </span>
+      </a>
+    </li>
+    <li role="presentation" id="nav_status2">
+        <a href="javascript:void(0)" onclick="getpacksaj(2)">已入库
+        <span class="badge">
+          {% if nStatus_2 %}
+            {{  nStatus_2  }}
+          {% else %}
+            0
+          {% endif %}
+        </span>
+      </a>
+    </li>
+  </ul>
+
+<div id="ptdata" data-ptdata=""></div>
+
+<div id="custom-toolbar">
+    <div class="form-inline" role="form">
+        <button class="btn btn-default">提交</button>
+        <button class="btn btn-default">修改</button>
+        <button class="btn btn-default">删除</button>
+    </div>
+</div>
+
+<table id="table-pagination" data-toggle="table" data-height="400" data-toolbar="#custom-toolbar" data-pagination="true" data-search="true">
+    <thead>
+        <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="id" data-sortable="true">包裹ID</th>
+            <th data-field="status" data-sortable="true">状态</th>
+            <th data-field="rep_no" data-sorter="priceSorter">仓位号</th>
+            <th data-field="content" data-sorter="priceSorter">内容说明</th>
+            <th data-field="deliver" data-sorter="priceSorter">快递公司</th>
+            <th data-field="deliver_no" data-sorter="priceSorter">快递单号</th>
+            <th data-field="shopping_site" data-sorter="priceSorter">购物网站</th>
+            <th data-field="createtime" data-sorter="priceSorter">提交时间</th>
+        </tr>
+    </thead>
+</table>
+
+{% endblock %}

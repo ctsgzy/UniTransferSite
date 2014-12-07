@@ -1,0 +1,62 @@
+<div class="jumbotron">
+  <div class="row">  
+    <div class="col-lg-8 col-md-8">
+      <h1>网站介绍</h1>
+      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    </div>
+    
+    <div class="col-lg-4 col-md-4">
+      <h1></h1>
+      <p>
+         欢迎您，{{user.username}}
+         {% csrf_token %}
+         <a href="/logout/" class="btn btn-info" role="button">注销</a>
+      </p>
+   </div>   
+</div>
+</div>
+<div>
+  <nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">物流管理 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/orderpack/">到货预报</a></li>
+            <li><a href="/mypacks">我的包裹</a></li>
+            <li class="divider"></li>
+            <li><a href="#">我的运单</a></li>
+            <li><a href="#">运单跟踪</a></li>
+            <li class="divider"></li>
+            <li><a href="#">收货地址管理</a></li>
+            <li><a href="#">公司地址</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">财务管理 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">充值</a></li>
+            <li><a href="#">余额</a></li>
+          </ul>
+        </li>
+      
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心 <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">个人资料</a></li>
+            <li><a href="#">修改改密</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">客服中心<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">咨询</a></li>
+            <li><a href="#">投诉</a></li>
+          </ul>
+        </li>
+      </ul>
+</div>

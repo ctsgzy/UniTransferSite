@@ -1,0 +1,64 @@
+{% extends "templates/main.html" %}
+
+{% block title %}User Login{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <div class="row">  
+    <div class="col-lg-9 col-md-9">
+      <h1>介绍</h1>
+      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    </div>
+    
+    <div class="col-lg-3 col-md-3">
+      <ul>
+          <li>欢迎您，{{username}}</li>
+          <li>11111111</li>
+          <li>22222222</li>
+          <li>33333333</li>
+      </ul> 
+   </div>   
+</div>
+
+<div>
+  <ul class="nav nav-pills" role="tablist">
+    <li role="presentation" class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">物流管理 <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">到货预报</a></li>
+          <li><a href="#">我的包裹</a></li>
+          <li><a href="#">我的运单</a></li>
+          <li><a href="#">运单跟踪</a></li>
+          <li class="divider"></li>
+          <li><a href="#">收货地址管理</a></li>
+          <li><a href="#">公司地址</a></li>
+        </ul>
+    </li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">财务管理 <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">充值</a></li>
+          <li><a href="#">余额</a></li>
+        </ul>
+    </li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">个人资料</a></li>
+          <li><a href="#">修改密码</a></li>
+        </ul>
+    </li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">客服中心 <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#">咨询</a></li>
+          <li><a href="#">投诉</a></li>
+        </ul>
+    </li>
+  </ul>
+</div>
+
+<div id="ClientContent">
+  {% block content %}{% endblock %}
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "templates/main.html" %}
+
+{% block title %}到货预报{% endblock %}
+
+{% block content %}
+
+{% include "templates/clientmenu.html" %}
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var opts = new Array();
+    var cons= new Array();
+    for(var i=0;i<15;i++){
+      opts[i] ="<option value="+(i+1)+">"+(i+1)+"件</option>";
+    }
+    for(var i=0;i<15;i++){
+      $("#packscount").append(opts[i]);
+    }
+    var addcons = function(){
+      for(i = 0;i<$("#packscount").val();i++){
+        cons[i] = '<input name="deliverContent'+ (i+1) + '" id="deliverContent' + (i+1) + '" type="text" required="required" class="form-control" placeholder="内容说明">';
+
+      }
+
+      $("#cons").append('<div id=subcons>');
+      for(i = 0;i<$("#packscount").val();i++){
+        $("#subcons").append(cons[i]);
+        $("#cons").append('</div');
+        }
+    };
+
+
+    $('#packscount').change(function(event){
+      $("#subcons").remove();
+      addcons();
+    });
+
+    addcons();
+
+    $('#test').click(function(event){
+      alert($("#aaa").html());
+    });
+
+    });
+
+
+
+</script>
+
+<div class="page-header">
+  <h3>到货预报</h3>
+</div>
+<div class="bs-callout bs-callout-info">
+  
+    <div class="row">
+      <div class="col-md-3">
+
+      </div>
+        <form class="col-md-6 infieldlabels" id="aaa" action="/orderpacksubmit/" method="post" role="form"> 
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" name="deliver" id="deliver" required="required" class="form-control" placeholder="请输入快递公司名称" autofocus>
+          </div>
+
+          <div class="form-group">
+            <input type="text" name="deliver_no" id="deliver_no" required="required" class="form-control" placeholder="请输入快递单号" >
+          </div>
+
+          <div class="form-group">
+            <input type="text" name="shopping_site" id="shopping_site" required="required" class="form-control" placeholder="请输入购物网站" >
+          </div>
+
+          <div class="form-group">
+              到货件数
+              <select  class="input-large form-control" name="packscount" id="packscount" >
+              </select>   
+          </div>
+          <div class="form-group" id = "cons">
+            
+          </div>
+
+          <button class="btn btn-primary topsecloginbtn"  id = "addorderpack" type="submit" > 提交</button>
+        </form>
+
+        <div class="col-md-3">
+    </div>
+  
+</div>
+
+{% endblock %}
